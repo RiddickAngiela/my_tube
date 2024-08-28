@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/email_service.dart'; // Import the EmailService from the services folder
 import '../widgets/bottom_nav_bar.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -10,23 +11,25 @@ class ContactScreen extends StatefulWidget {
 
 class _ContactScreenState extends State<ContactScreen> {
   final _formKey = GlobalKey<FormState>();
-  // ignore: unused_field
   String _name = '';
-  // ignore: unused_field
   String _email = '';
-  // ignore: unused_field
   String _message = '';
 
-  void _sendEmail() {
-    if (_formKey.currentState!.validate()) {
-      // Here you would typically send the email using an email service
-      // For demonstration, we will just show a success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Email sent successfully!')),
-      );
+  final EmailService _emailService = EmailService(); // Initialize EmailService
 
-      // Clear the fields after sending
-      _formKey.currentState!.reset();
+  void _sendEmail() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _emailService.sendEmail(_email, 'Contact from $_name', _message);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Email sent successfully!')),
+        );
+        _formKey.currentState!.reset(); // Clear the form fields
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to send email: $e')),
+        );
+      }
     }
   }
 
@@ -42,7 +45,6 @@ class _ContactScreenState extends State<ContactScreen> {
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
-            // Allows scrolling for smaller screens
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

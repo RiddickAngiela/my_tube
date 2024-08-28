@@ -8,7 +8,7 @@ class VideoCard extends StatelessWidget {
   final int views;
   final int comments;
 
-  VideoCard({
+  const VideoCard({super.key, 
     required this.title,
     required this.description,
     required this.profileName,
@@ -20,7 +20,7 @@ class VideoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -29,11 +29,11 @@ class VideoCard extends StatelessWidget {
             subtitle: Text('By $profileName • ${timeCreated.toLocal()}'),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(description),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -41,7 +41,7 @@ class VideoCard extends StatelessWidget {
                 Text('$comments Comments'),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Subscribe'),
+                  child: const Text('Subscribe'),
                 ),
               ],
             ),

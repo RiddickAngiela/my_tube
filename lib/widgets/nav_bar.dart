@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
+  const NavBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 4, // Add subtle elevation
-      backgroundColor: Colors.blueGrey[900], // Dark background color
+      backgroundColor: Colors.blue, // Dark background color
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'My-tube',
             style: TextStyle(
               color: Colors.white,
@@ -36,7 +38,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.notifications, color: Colors.white),
+            icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
               // Handle notification button press
               print('Notification pressed');
@@ -48,5 +50,5 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

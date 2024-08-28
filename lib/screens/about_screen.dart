@@ -15,7 +15,7 @@ class AboutPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Welcome to Entertainment Hub!',
+              'Welcome to My-Tube!',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -23,7 +23,7 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'Entertainment Hub is your one-stop destination for all things entertainment. Whether you love watching the latest videos, listening to music, catching up on podcasts, or following your favorite sports, we have you covered!',
+              'My-Tube is your one-stop destination for all things entertainment. Whether you love watching the latest videos, listening to music, catching up on podcasts, or following your favorite sports, we have you covered!',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 16),
@@ -67,7 +67,7 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 4),
             Text(
-              '📧 support@entertainmenthub.com',
+              '📧 support@mytube.com',
               style: TextStyle(fontSize: 16, color: Colors.blue),
             ),
             SizedBox(height: 16),

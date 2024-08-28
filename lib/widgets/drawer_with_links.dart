@@ -5,6 +5,7 @@ import 'package:my_tube/screens/music_screen.dart';
 import 'package:my_tube/screens/podcast_screen.dart';
 import 'package:my_tube/screens/sports_screen.dart';
 import 'package:my_tube/screens/trending_screen.dart';
+import 'package:my_tube/screens/terms_screen.dart'; // Import the TermsScreen
 
 class DrawerWithLinks extends StatelessWidget {
   const DrawerWithLinks({super.key});
@@ -46,8 +47,10 @@ class DrawerWithLinks extends StatelessWidget {
                 _buildLink(context, 'Podcast', Icons.radio, PodcastScreen()),
                 _buildLink(context, 'About', Icons.info,
                     const AboutPage()), // Use AboutPage here
-                _buildLink(
-                    context, 'Contact', Icons.contact_mail, ContactScreen()),
+                _buildLink(context, 'Contact', Icons.contact_mail,
+                    const ContactScreen()),
+                const Divider(), // Add a divider before the logout option
+                _buildLogoutLink(context), // Add the logout link
               ],
             ),
           ),
@@ -59,6 +62,11 @@ class DrawerWithLinks extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   // Navigate to Privacy Policy and Terms of Service page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const TermsScreen()),
+                  );
                 },
                 child: const Text(
                   'Privacy Policy. Terms of Service',
@@ -85,6 +93,21 @@ class DrawerWithLinks extends StatelessWidget {
           context,
           MaterialPageRoute(builder: (context) => page),
         );
+      },
+    );
+  }
+
+  Widget _buildLogoutLink(BuildContext context) {
+    return ListTile(
+      leading: const Icon(Icons.logout, color: Colors.blue),
+      title: const Text(
+        'Logout',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      ),
+      onTap: () {
+        // Handle the logout process here
+        // For example, you can navigate to the login screen or perform any necessary actions
+        Navigator.pushReplacementNamed(context, '/login');
       },
     );
   }
