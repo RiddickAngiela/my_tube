@@ -6,6 +6,7 @@ import 'package:my_tube/screens/podcast_screen.dart';
 import 'package:my_tube/screens/sports_screen.dart';
 import 'package:my_tube/screens/trending_screen.dart';
 import 'package:my_tube/screens/terms_screen.dart'; // Import the TermsScreen
+import 'package:my_tube/screens/login_screen.dart'; // Import your LoginScreen
 
 class DrawerWithLinks extends StatelessWidget {
   const DrawerWithLinks({super.key});
@@ -45,8 +46,7 @@ class DrawerWithLinks extends StatelessWidget {
                 _buildLink(
                     context, 'Sports', Icons.sports_soccer, SportsScreen()),
                 _buildLink(context, 'Podcast', Icons.radio, PodcastScreen()),
-                _buildLink(context, 'About', Icons.info,
-                    const AboutPage()), // Use AboutPage here
+                _buildLink(context, 'About', Icons.info, const AboutPage()),
                 _buildLink(context, 'Contact', Icons.contact_mail,
                     const ContactScreen()),
                 const Divider(), // Add a divider before the logout option
@@ -106,8 +106,11 @@ class DrawerWithLinks extends StatelessWidget {
       ),
       onTap: () {
         // Handle the logout process here
-        // For example, you can navigate to the login screen or perform any necessary actions
-        Navigator.pushReplacementNamed(context, '/login');
+        // Navigate to the login screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
       },
     );
   }

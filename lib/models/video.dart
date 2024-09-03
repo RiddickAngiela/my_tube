@@ -5,7 +5,10 @@ import '../screens/subscription_screen.dart';
 import '../screens/profile_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _BottomNavBarState createState() => _BottomNavBarState();
 }
 
@@ -21,7 +24,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     switch (index) {
       case 0:
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            context, MaterialPageRoute(builder: (context) => const HomeScreen()));
         break;
       case 1:
         Navigator.push(
@@ -33,7 +36,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         break;
       case 3:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+            context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
         break;
     }
   }

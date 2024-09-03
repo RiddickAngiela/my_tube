@@ -16,6 +16,7 @@ dependencies:
   firebase_core: ^3.3.0
   http: ^1.2.2
   carousel_slider: ^5.0.0  # Updated dependency version
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

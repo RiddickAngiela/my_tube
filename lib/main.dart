@@ -6,16 +6,18 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Video App',
       theme: ThemeData(
-        primaryColor: Colors.red, // Sets the primary color to red
+        primaryColor: Colors.blue, // Sets the primary color to red
         scaffoldBackgroundColor:
             Colors.white, // Sets the background color to white
         appBarTheme: const AppBarTheme(
-          color: Colors.red, // AppBar color
+          color: Colors.blue, // AppBar color
           titleTextStyle: TextStyle(
             color: Colors.black, // AppBar title text color
             fontFamily: 'Lato', // Use Lato font
@@ -23,17 +25,17 @@ class MyApp extends StatelessWidget {
           ),
         ),
         buttonTheme: const ButtonThemeData(
-          buttonColor: Colors.red, // Button color
+          buttonColor: Colors.blue, // Button color
           textTheme: ButtonTextTheme.primary, // Text color for buttons
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
-            backgroundColor: Colors.red, // Background color for the button
+            backgroundColor: Colors.blue, // Background color for the button
           ),
         ),
         iconTheme: const IconThemeData(
-          color: Colors.red, // Set the default icon color to red
+          color: Colors.blue, // Set the default icon color to red
         ),
         cardColor: Colors.white, // Card color
         textTheme: const TextTheme(
@@ -52,10 +54,10 @@ class MyApp extends StatelessWidget {
           filled: true,
           fillColor: Colors.white, // Background color for text fields
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red), // Border color
+            borderSide: BorderSide(color: Colors.blue), // Border color
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red), // Focused border color
+            borderSide: BorderSide(color: Colors.blue), // Focused border color
           ),
           labelStyle: TextStyle(
             color: Colors.black, // Label text color
@@ -64,7 +66,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
