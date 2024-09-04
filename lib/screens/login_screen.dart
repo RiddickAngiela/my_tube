@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_tube/screens/signup_screen.dart'; // Import your SignupScreen
-import 'package:my_tube/screens/home_screen.dart'; // Import your HomeScreen
+import 'package:my_tube/models/api_service.dart';
+import 'package:my_tube/screens/signup_screen.dart';
+import 'package:my_tube/screens/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:my_tube/providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -15,19 +17,40 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
 
-  void _login() async {
+  Future<void> _login() async {
     setState(() {
       _isLoading = true;
     });
 
-    // Simulate a network call
-    await Future.delayed(const Duration(seconds: 2));
+    final apiService = ApiService();
+    try {
+      final response = await apiService.loginUser(
+        _emailController.text,
+        _passwordController.text,
+      );
 
-    // Navigate to the homepage after successful login
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );
+      if (response.containsKey('token')) {
+        Provider.of<AuthProvider>(context, listen: false)
+            .setToken(response['token']);
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Invalid email or password')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -35,7 +58,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -45,7 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          // Main content
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
@@ -63,12 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  // Email TextField
                   TextField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    style: const TextStyle(
-                        color: Colors.black), // Text color inside the input
+                    style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle: const TextStyle(color: Colors.white),
@@ -83,12 +102,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Password TextField
                   TextField(
                     controller: _passwordController,
                     obscureText: true,
-                    style: const TextStyle(
-                        color: Colors.black), // Text color inside the input
+                    style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle: const TextStyle(color: Colors.white),
@@ -103,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Login Button
                   ElevatedButton(
                     onPressed: _isLoading ? null : _login,
                     style: ElevatedButton.styleFrom(
@@ -115,8 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       elevation: 5,
-                      shadowColor: Colors.black
-                          .withOpacity(0.5), // Shadow color for better depth
+                      shadowColor: Colors.black.withOpacity(0.5),
                     ),
                     child: _isLoading
                         ? const CircularProgressIndicator(
@@ -130,7 +145,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                   ),
                   const SizedBox(height: 20),
-                  // Additional statement with a link to the signup page
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -165,7 +179,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          // Loading overlay
           if (_isLoading)
             Container(
               color: Colors.black.withOpacity(0.5),

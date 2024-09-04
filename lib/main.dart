@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/auth_provider.dart';
 import 'screens/home_screen.dart';
+import 'screens/signup_screen.dart';
 
 void main() async {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,60 +23,59 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Video App',
       theme: ThemeData(
-        primaryColor: Colors.blue, // Sets the primary color to red
-        scaffoldBackgroundColor:
-            Colors.white, // Sets the background color to white
+        primaryColor: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
-          color: Colors.blue, // AppBar color
+          color: Colors.blue,
           titleTextStyle: TextStyle(
-            color: Colors.black, // AppBar title text color
-            fontFamily: 'Lato', // Use Lato font
-            letterSpacing: 1.0, // Letter spacing
+            color: Colors.black,
+            fontFamily: 'Lato',
+            letterSpacing: 1.0,
           ),
         ),
         buttonTheme: const ButtonThemeData(
-          buttonColor: Colors.blue, // Button color
-          textTheme: ButtonTextTheme.primary, // Text color for buttons
+          buttonColor: Colors.blue,
+          textTheme: ButtonTextTheme.primary,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
-            backgroundColor: Colors.blue, // Background color for the button
+            backgroundColor: Colors.blue,
           ),
         ),
         iconTheme: const IconThemeData(
-          color: Colors.blue, // Set the default icon color to red
+          color: Colors.blue,
         ),
-        cardColor: Colors.white, // Card color
+        cardColor: Colors.white,
         textTheme: const TextTheme(
           bodyLarge: TextStyle(
-            color: Colors.black, // Default text color
-            fontFamily: 'Lato', // Use Lato font
-            letterSpacing: 1.0, // Letter spacing
+            color: Colors.black,
+            fontFamily: 'Lato',
+            letterSpacing: 1.0,
           ),
           bodyMedium: TextStyle(
-            color: Colors.black, // Secondary text color
-            fontFamily: 'Lato', // Use Lato font
-            letterSpacing: 1.0, // Letter spacing
+            color: Colors.black,
+            fontFamily: 'Lato',
+            letterSpacing: 1.0,
           ),
         ),
         inputDecorationTheme: const InputDecorationTheme(
           filled: true,
-          fillColor: Colors.white, // Background color for text fields
+          fillColor: Colors.white,
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue), // Border color
+            borderSide: BorderSide(color: Colors.blue),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue), // Focused border color
+            borderSide: BorderSide(color: Colors.blue),
           ),
           labelStyle: TextStyle(
-            color: Colors.black, // Label text color
-            fontFamily: 'Lato', // Use Lato font
-            letterSpacing: 1.0, // Letter spacing
+            color: Colors.black,
+            fontFamily: 'Lato',
+            letterSpacing: 1.0,
           ),
         ),
       ),
-      home: const HomeScreen(),
+      home: SignupScreen(), // Start with the SignupScreen
     );
   }
 }
